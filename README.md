@@ -26,11 +26,6 @@ library(readr)
 dados_historicos <- read_csv("dados_historicos.csv")
 View(dados_historicos)
 
-#-------------------------------
-# Os dados ja foram limpos anteriormente, porem se for usar o R é 
-# PRECISA LIMPAR O DADO E ORGANIZAR
-#----------------------------------
-
 # Cria o modelo de Machine Learning com algoritmo isolationForest
 ?isolationForest  # ? ISSO PUXA UMA EXPLICACAO
 modelo_ml = isolationForest$new() 
@@ -38,9 +33,8 @@ modelo_ml = isolationForest$new()
 # Treina o modelo
 modelo_ml$fit(dados_historicos)
 
-# Faz as previsões com o modelo usando os dados históricos
-# %>% ESSE É O OPERADOR DE CONCATENAR - pegar dados_historicos - TREINAR- E 
-#  organizar em ordem decrescente
+# Faz as previsões com o modelo usando os dados histórico
+# organizar em ordem decrescente
 
 previsoes_historico = dados_historicos %>%
   modelo_ml$predict() %>%
@@ -50,7 +44,6 @@ View(previsoes_historico)
 
 # Density Plot 
 plot(density(previsoes_historico$anomaly_score))
-#----------------------------
 
 # Quanto maior o anomaly score maior a chance do registro ser uma anomalia
 # Vamos definir como regra que anomaly score acima de 0.62 é uma anomalia
